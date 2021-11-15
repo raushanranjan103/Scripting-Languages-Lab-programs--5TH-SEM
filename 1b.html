@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of food items</title>
+</head>
+<body>
+    <form>
+        <h3>Choose which food do you wanted to prefer in dinner</h3>
+        <select id="food" onchange="selectFood()">
+            <option value="Pizza">Pizza</option>
+            <option value="Paneer">Paneer</option>
+            <option values="Rice">Rice</option>
+        </select>
+    </form>
+    <script>
+        function selectFood()
+        {
+            choice=document.forms[0].food.value;
+            alert("Your choice is "+choice);
+        }
+    </script>
+    
+</body>
+</html>
