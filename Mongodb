@@ -1,0 +1,92 @@
+mongo
+MongoDB shell version v3.6.3
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.6.3
+Server has startup warnings: 
+2021-11-16T13:20:29.750+0530 I STORAGE  [initandlisten] 
+2021-11-16T13:20:29.750+0530 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2021-11-16T13:20:29.750+0530 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2021-11-16T13:20:34.843+0530 I CONTROL  [initandlisten] 
+2021-11-16T13:20:34.843+0530 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2021-11-16T13:20:34.843+0530 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2021-11-16T13:20:34.843+0530 I CONTROL  [initandlisten] 
+> db.createCollection("employee")
+{ "ok" : 1 }
+> db.employee.insert({"ssn":'E1',"Name":'sam',"dept":'dept1',"pno":'p1'})
+WriteResult({ "nInserted" : 1 })
+> db.employee.insert({"ssn":'E2',"Name":'RICK',"dept":'dept1',"pno":'p2'})
+WriteResult({ "nInserted" : 1 })
+> db.employee.find({"dept":'dept1'}).pretty()
+{
+	"_id" : ObjectId("6193716d41f026eb02f459b1"),
+	"ssn" : "E1",
+	"Name" : "sam",
+	"dept" : "dept1",
+	"pno" : "p1"
+}
+{
+	"_id" : ObjectId("619371d341f026eb02f459b2"),
+	"ssn" : "E2",
+	"Name" : "RICK",
+	"dept" : "dept1",
+	"pno" : "p2"
+}
+> db.employee.find({"pno":'p1'}).pretty()
+{
+	"_id" : ObjectId("6193716d41f026eb02f459b1"),
+	"ssn" : "E1",
+	"Name" : "sam",
+	"dept" : "dept1",
+	"pno" : "p1"
+}
+> db.createCollection("warehouse")
+{ "ok" : 1 }
+> db.warehouse.insert({"pid":'p1',"pname":'wire',"sid":'s1',"sname":'tata'})
+WriteResult({ "nInserted" : 1 })
+> db.warehouse.insert({"pid":'p2',"pname":'nut',"sid":'s2',"sname":'mi'})
+WriteResult({ "nInserted" : 1 })
+> db.warehouse.update({"pid":'p1'}{$set:{"pid":'p3'}}{multi:true})
+2021-11-16T14:34:34.393+0530 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:32
+> db.warehouse.update({"pid":'p1'},{$set:{"pid":'p3'}},{multi:true})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.warehouse.find({"pid":'p2'}).pretty()
+{
+	"_id" : ObjectId("619373cb41f026eb02f459b4"),
+	"pid" : "p2",
+	"pname" : "nut",
+	"sid" : "s2",
+	"sname" : "mi"
+}
+> db.createCollection("port")
+{ "ok" : 1 }
+> db.port.insert({"bid":'b1',"bname":'abc',"color":'black',"sname":'john',"sid":'s1',"day":'friday'})
+WriteResult({ "nInserted" : 1 })
+> db.port.insert({"bid":'b2',"bname":'pqr',"color":'red',"sname":'sam',"sid":'s2',"day":'sunday'})
+WriteResult({ "nInserted" : 1 })
+> db.port.find({"sname":'sam'}).count()
+1
+> db.port.find({"color":'black'}).pretty()
+{
+	"_id" : ObjectId("6193762941f026eb02f459b5"),
+	"bid" : "b1",
+	"bname" : "abc",
+	"color" : "black",
+	"sname" : "john",
+	"sid" : "s1",
+	"day" : "friday"
+}
+> db.createCollection("library")
+{ "ok" : 1 }
+> db.library.insert({"usn":'is127',"name":'sam',"isbn":'b11',"title":'cars'})
+WriteResult({ "nInserted" : 1 })
+> db.library.insert({"usn":'is130',"name":'yash',"isbn":'b12',"title":'db'})
+WriteResult({ "nInserted" : 1 })
+> db.library.find({"title":'db'},{"name":1,_id:0}).pretty()
+{ "name" : "yash" }
+> db.library.find({"isbn":'b12'},{"usn":'is130',_id:0}).pretty()
+{ "usn" : "is130" }
+> db.library.find({"isbn":'b12'},{"',_id:0}).pretty()
+[1]+  Stopped                 mongo
+5c@iseadmin:~$ sp
+Username: 
+
